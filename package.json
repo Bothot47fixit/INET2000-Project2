@@ -14,5 +14,17 @@
   "devDependencies": {
     "vite": "^4.0.0",
     "@vitejs/plugin-react": "^4.0.0"
-  }
+  },
+  "description": "A super simple FastAPI application that allows students to view and sign up for extracurricular activities.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Bothot47fixit/INET2000-Project2.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Bothot47fixit/INET2000-Project2/issues"
+  },
+  "homepage": "https://github.com/Bothot47fixit/INET2000-Project2#readme"
 }

@@ -4,7 +4,6 @@ import React from 'react';
 import ReactDOM from 'react-dom/client'
 import App from './App'; // Import your App component
 import './index.css'; // Import your CSS file
-
 // Define the DATA array
 const DATA = [
   { id: "todo-0", name: "Eat", completed: true },
