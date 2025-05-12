@@ -5,15 +5,17 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "deploy": "gh-pages -d dist"
   },
   "dependencies": {
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
-    "vite": "^4.0.0",
-    "@vitejs/plugin-react": "^4.0.0"
+    "@vitejs/plugin-react": "^4.0.0",
+    "gh-pages": "^6.3.0",
+    "vite": "^6.3.5"
   },
   "description": "A super simple FastAPI application that allows students to view and sign up for extracurricular activities.",
   "repository": {
@@ -26,5 +28,5 @@
   "bugs": {
     "url": "https://github.com/Bothot47fixit/INET2000-Project2/issues"
   },
-  "homepage": "https://github.com/Bothot47fixit/INET2000-Project2#readme"
+  "homepage": "https://Bothot47fixit.github.io/INET2000-Project2/"
 }

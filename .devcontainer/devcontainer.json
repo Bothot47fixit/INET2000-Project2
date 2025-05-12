@@ -1,15 +1,13 @@
 {
-  "name": "Python 3",
+  "name": "Node.js",
   "image": "mcr.microsoft.com/vscode/devcontainers/python:3.13",
-  "forwardPorts": [8000],
-  "postCreateCommand": "pip install -r requirements.txt",
+  "forwardPorts": [5500],
+  "postCreateCommand": "npm install",
   "customizations": {
-    "vscode": {
-      "extensions": [
+    "extensions": [
         "GitHub.copilot",
-        "ms-python.python",
-        "ms-python.debugpy"
+        "dbaeumer.vscode-eslint",
+        "esbenp.prettier-vscode"
       ]
     }
   }
-}

@@ -1,28 +1,36 @@
 
 import React, { useState } from "react";
+import Form from "./components/Form";
 import FilterButton from "./components/FilterButton";
 import Todo from "./components/Todo";
-import React, { useState } from 'react';
 
 
 
-function App() {// defined tasks array
+
+function App({tasks}) {// defined tasks array
+    console.log('App component loaded with tasks:', tasks);// talk to me console
+       const [currentTasks, setTasks] = useState(tasks); 
+       const [filter, setFilter] = useState("All");
+      
+
+
+      const addTask =(name) => {
+      const newTask = { id: `todo-${currentTasks.length}`, name, completed: false };
+    setTasks([...currentTasks, newTask]); // Add the new task to the current tasks
+  };
+
   
-  const [ tasks , setTasks]= useState([
-    { id: 1, name: "Task 1", completed: false },
-    { id: 2, name: "Task 2", completed: true },  
-    { id: 3, name: "Task 3", completed: false },
-  ]);
-// those stupid All buttons dummy
-  const [filter, setFilter] = useState("All");
    // Define filter functions
   const FILTER_MAP = {
     All: () => true,
     Active: (task) => !task.completed,
     Completed: (task) => task.completed,
   };
-  const FILTER_NAMES = Object.keys(FILTER_MAP); 
- const filteredTasks = tasks.filter(FILTER_MAP[filter]);
+
+ const FILTER_NAMES = Object.keys(FILTER_MAP); 
+
+ const filteredTasks = currentTasks.filter(FILTER_MAP[filter]);
+
 
   const filterButtons = FILTER_NAMES.map((name) => (
     <FilterButton
@@ -36,7 +44,7 @@ function App() {// defined tasks array
 
 // Function to toggle the completed state of a task
   const toggleTaskCompleted = (id) => {
-    const updatedTasks = tasks.map(task => {
+    const updatedTasks = currentTasks.map(task => {
       if (task.id === id) {
         return { ...task, completed: !task.completed };
       }
@@ -45,54 +53,31 @@ function App() {// defined tasks array
     setTasks(updatedTasks);
   };
 
-  const taskList = tasks.map((task) => (
-<Todo 
-key={task.id} 
-name={task.name} 
-completed={task.completed} 
-toggleTaskCompleted= {() => toggleTaskCompleted(task.id)}
+  const taskList = currentTasks.map((task) => (
+      <Todo 
+    key={task.id} 
+    name={task.name} 
+    completed={task.completed} 
+    toggleTaskCompleted= {() => toggleTaskCompleted(task.id)}
 
  />
 
 ));
-const remainingTasks = tasks.filter(task => !task.completed).length;// Count the number of remaining tasks
+const remainingTasks = currentTasks.filter(task => !task.completed).length;// Count the number of remaining tasks
 
     return (
         <div className="todoapp stack-large">
             <h1 className="marquee">ToDoMatic</h1>
-            <form>          
-
-           <h2 className="label-wrapper">
-          
-          <label htmlFor="new-todo-input" className="label__lg">
-            What needs to be done?
-
-          </label>           </h2>
-
-          <input
-            type="text"
-            id="new-todo-input"
-            className="input input__lg"
-            name="text"
-            autoComplete="off"
-            />
-          <button type="submit" className="btn btn__primary btn__lg">
-            Add
-          </button>
-        </form>
-        
+                   
+            <Form addTask={addTask} />    
 
             
-<div className="filters btn-group stack-exception">
-        <FilterButton name="All"/>
-        <FilterButton name= "Active" />
-        <FilterButton name="Complete"
-        />
-      </div>
+            <div className="filters btn-group stack-exception"> {filterButtons}   </div>           
         
-     <h2 id="list-heading">
-  {remainingTasks > 0 ? `${remainingTasks} tasks remaining` : "No tasks remaining"}
-</h2>
+             <h2 id="list-heading">
+                   {remainingTasks > 0 ? `${remainingTasks} tasks remaining`
+                                       : "No tasks remaining"}
+                  </h2>
 
       <ul
         role="list"
@@ -108,5 +93,4 @@ const remainingTasks = tasks.filter(task => !task.completed).length;// Count the
 
 export default App;
              
-
 

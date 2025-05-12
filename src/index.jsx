@@ -12,9 +12,7 @@ const DATA = [
 ];
 // Get the root element from the DOM
 const rootElement = document.getElementById('root');
-
-// Create a root and render the App component
-const root = ReactDOM.createRoot(rootElement);
+const root = ReactDOM.createRoot(rootElement); // Create a root and render the App component
 root.render(
   <React.StrictMode>
     <App tasks={DATA} />
