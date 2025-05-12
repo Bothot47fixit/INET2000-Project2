@@ -3,4 +3,16 @@ import react from '@vitejs/plugin-react';
 
 export default defineConfig({
   plugins: [react()],
+base: '/', // Use '/' for development
+  server: {
+    port: 5500, // Ensure this matches the port you're using
+  },
+  build: {
+    rollupOptions: {
+      input: 'index.html', // Ensure Vite knows where to find the entry point
+    },
+  },
 });
+
+
+
