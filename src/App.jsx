@@ -1,4 +1,4 @@
-
+import './index.css'; // Adjust the path if necessary
 import React, { useState } from 'react'; 
 import FilterButton from "./components/FilterButton";
 import Todo from "./components/Todo";
@@ -12,13 +12,18 @@ const FILTER_MAP = {
 const FILTER_NAMES = Object.keys(FILTER_MAP);
 
 function App(props) {  
-  const [tasks, setTasks] = useState(props.tasks);
+  const [tasks, setTasks] = useState(props.tasks || []);
   const [filter, setFilter] = useState("All");
-
+  const [submissionMessage, setSubmissionMessage] = useState(""); // State for the message
         function addTask(name) {
           const newTask = { id: `todo-${tasks.length}`, name, completed: false };
             setTasks([...tasks, newTask]);
 }
+function addTask(name) {
+    const newTask = { id: `todo-${tasks.length}`, name, completed: false };
+    setTasks([...tasks, newTask]);
+  }
+
 
 function toggleTaskCompleted(id) {
     const updatedTasks = tasks.map(task => {
@@ -70,24 +75,34 @@ const filterList = FILTER_NAMES.map(name => (
       setFilter={setFilter}
     />
   ));
-
-const incompleteTasks = tasks.filter(task => !task.completed).length;
+        
+        const incompleteTasks = tasks.filter(task => !task.completed).length;
+      console.log("Incomplete tasks:", incompleteTasks); // Debugging log
   const tasksNoun = incompleteTasks !== 1 ? "tasks" : "task";
   const headingText = `${incompleteTasks} ${tasksNoun} remaining`;
 
+
   function handleSubmit(e) {
     e.preventDefault();
+    console.log("Form submitted!"); // Debugging log
     const name = e.target.elements["new-todo-input"].value.trim();
     if (name) {
       addTask(name);
+      setSubmissionMessage("Thank you! Your task has been submitted.");
+      
+      console.log("Submission message set:", "Thank you! Your task has been submitted."); 
       e.target.reset();
+     setTimeout(() => setSubmissionMessage(""), 6000); 
     }
   }
 
 
     return (
     <div className="todoapp stack-large">
-      <h1>TodoMatic</h1>
+      <div className="marquee">
+      <span>TodoMatic!  Manage your tasks efficiently!</span>
+      </div>
+
       <form onSubmit={handleSubmit}>
         <h2 className="label-wrapper">
           <label htmlFor="new-todo-input" className="label__lg">
@@ -101,10 +116,14 @@ const incompleteTasks = tasks.filter(task => !task.completed).length;
           name="text"
           autoComplete="off"
         />
-        <button type="submit" className="btn btn__primary btn__lg">
-          Add
+        <button type="submit" className="btn btn__primary btn__lg"
+       
+         >
+          Add/Submit
         </button>
       </form>
+      {submissionMessage && <p className="submission-message">{submissionMessage}</p>}
+      {console.log("Rendering submissionMessage:", submissionMessage)}
       <div className="filters btn-group stack-exception">{filterList}</div>
       <h2 id="list-heading">{headingText}</h2>
       <ul

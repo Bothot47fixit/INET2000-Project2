@@ -87,13 +87,17 @@ useEffect(() => {
       <div className="btn-group">
         <button
           type="button"
-          className="btn"
+          className="btn btn-edit"
           onClick={() => setIsEditing(true)}
           ref={editButtonRef}
         >
+
+
           <FontAwesomeIcon icon={faPencilAlt} /> {/* Pencil Icon */} 
           Edit <span className="visually-hidden">{name}</span>
         </button>
+
+
          <button
           type="button"
           className="btn btn__danger"
