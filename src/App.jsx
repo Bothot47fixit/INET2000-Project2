@@ -20,6 +20,8 @@ function App(props) {
             setTasks([...tasks, newTask]);
 }
 function addTask(name) {
+  console.log("Adding task:", name);
+
     const newTask = { id: `todo-${tasks.length}`, name, completed: false };
     setTasks([...tasks, newTask]);
   }
@@ -88,7 +90,7 @@ const filterList = FILTER_NAMES.map(name => (
     const name = e.target.elements["new-todo-input"].value.trim();
     if (name) {
       addTask(name);
-      setSubmissionMessage("Thank you! Your task has been submitted.");
+      setSubmissionMessage(`Thank you! Your task "${name}" has been submitted.`); 
       
       console.log("Submission message set:", "Thank you! Your task has been submitted."); 
       e.target.reset();
