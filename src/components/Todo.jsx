@@ -1,4 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPencilAlt, faTrash } from "@fortawesome/free-solid-svg-icons";
+
+
 // Custom hook to track the previous value of a state or prop
 function usePrevious(value) {
   const ref = useRef();
@@ -9,58 +13,54 @@ function usePrevious(value) {
 }
 
 
-function Todo({ name, completed }) {
+function Todo({ id, name, completed, toggleTaskCompleted, deleteTask, editTask }) {
   const [isEditing, setIsEditing] = useState(false);
+  const [newName, setNewName] = useState(name);
+
   const editFieldRef = useRef(null); // Reference for the input field
   const editButtonRef = useRef(null); // Reference for the edit button
   const prevIsEditing = usePrevious(isEditing); // Track the previous value of isEditing
-   // Log "main render" whenever the component renders
-   console.log("main render");
-
-   useEffect(() => {
-    const wasNotEditingBefore = !prevIsEditing && isEditing;
-    const wasEditingBefore = prevIsEditing && !isEditing;
-
-    if (wasNotEditingBefore) {
-      editFieldRef.current.focus(); // Focus on the input field
-    } else if (wasEditingBefore) {
-      editButtonRef.current.focus(); // Focus on the edit button
+  
+  
+useEffect(() => {
+    if (!prevIsEditing && isEditing) {
+      editFieldRef.current.focus(); // Focus on the input field when editing starts
     }
-    }, [isEditing, prevIsEditing]); // Run this effect when isEditing or prevIsEditing changes
+    if (prevIsEditing && !isEditing) {
+      editButtonRef.current.focus(); // Focus on the edit button after saving
+    }
+  }, [isEditing, prevIsEditing]);
 
-    console.log(`isEditing changed: ${isEditing}`);
-  // Dependency array ensures this runs only when isEditing changes
-
-  const handleEdit = () => {
-    setIsEditing(true);
-    setTimeout(() => editFieldRef.current.focus(), 0); // Focus the input field when editing starts
-    console.log(editButtonRef.current); // Log the button element to the console
-  editFieldRef.current.focus(); // Focus the input field when editing starts
-};
-
-  const handleSave = () => {
-    setIsEditing(false);
-    editButtonRef.current.focus(); // Focus the edit button after saving
+  const handleChange = (e) => {
+    setNewName(e.target.value);
   };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    editTask(id, newName); // Call the editTask function from App.jsx
+    setIsEditing(false); // Exit editing mode
+  };
+
+   
   const editingTemplate = (
-    <div className="stack-small">
+    <form className="stack-small" onSubmit={handleSubmit}>
       <div className="form-group">
-        <label className="todo-label" htmlFor={name}>
+        <label className="todo-label" htmlFor={id}>
           New name for {name}
         </label>
         <input
-          id={name}
+          id={id}
           className="todo-text"
           type="text"
-          defaultValue={name}
-          ref={editFieldRef} // Attach the input field reference
+          value={newName}
+          onChange={handleChange}
+          ref={editFieldRef}
         />
       </div>
-      <div className="btn-group">
-        <button type="button" className="btn btn__primary" onClick={handleSave}>
+     <div className="btn-group">
+        <button type="submit" className="btn btn__primary">
           Save <span className="visually-hidden">new name for {name}</span>
         </button>
-
         <button
           type="button"
           className="btn btn__danger"
@@ -69,14 +69,18 @@ function Todo({ name, completed }) {
           Cancel <span className="visually-hidden">editing {name}</span>
         </button>
       </div>
-    </div>
+    </form>
   );
-
-  const viewTemplate = (
+    const viewTemplate = (
     <div className="stack-small">
       <div className="c-cb">
-        <input id={name} type="checkbox" defaultChecked={completed} />
-        <label className="todo-label" htmlFor={name}>
+        <input
+          id={id}
+          type="checkbox"
+          defaultChecked={completed}
+          onChange={() => toggleTaskCompleted(id)}
+        />
+        <label className="todo-label" htmlFor={id}>
           {name}
         </label>
       </div>
@@ -84,22 +88,27 @@ function Todo({ name, completed }) {
         <button
           type="button"
           className="btn"
-          onClick={() => setIsEditing(true)} // Set editing to true
-          ref={editButtonRef} // Attach the edit button reference
+          onClick={() => setIsEditing(true)}
+          ref={editButtonRef}
         >
+          <FontAwesomeIcon icon={faPencilAlt} /> {/* Pencil Icon */} 
           Edit <span className="visually-hidden">{name}</span>
         </button>
-        <button type="button" className="btn btn__danger">
+         <button
+          type="button"
+          className="btn btn__danger"
+          onClick={() => deleteTask(id)}
+        >
+          <FontAwesomeIcon icon={faTrash} /> {/* Trash Can Icon */}
           Delete <span className="visually-hidden">{name}</span>
         </button>
       </div>
     </div>
   );
-
-  return <li className="todo">{isEditing ? editingTemplate : viewTemplate}</li>;
+ 
+  
+   return <li className="todo">{isEditing ? editingTemplate : viewTemplate}</li>;
 }
-
-
 
 
 export default Todo;
