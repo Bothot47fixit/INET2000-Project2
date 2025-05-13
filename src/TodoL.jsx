@@ -63,7 +63,19 @@ function deleteTask(id) {
 
 
 
-    
+    const taskList = tasks
+    .filter(FILTER_MAP[filter])
+    .map(task => (
+      <Todo
+        key={task.id}
+        id={task.id}
+        name={task.name}
+        completed={task.completed}
+        toggleTaskCompleted={toggleTaskCompleted}
+        deleteTask={deleteTask}
+        editTask={editTask}
+      />
+    ));
 
 
 const filterList = FILTER_NAMES.map(name => (
@@ -80,53 +92,25 @@ const filterList = FILTER_NAMES.map(name => (
   const tasksNoun = incompleteTasks !== 1 ? "tasks" : "task";
   const headingText = `${incompleteTasks} ${tasksNoun} remaining`;
 
-return (
+
+  
+
+
+    return (
     <div className="todoapp stack-large">
       <div className="marquee">
-        <span>TodoMatic! Manage your tasks efficiently!</span>
+      <span>TodoMatic!  Manage your tasks efficiently!</span>
       </div>
 
-      <Form handleSubmit={handleSubmit} />
+       <Form handleSubmit={handleSubmit} />
       {submissionMessage && <p className="submission-message">{submissionMessage}</p>}
+      {console.log("Rendering submissionMessage:", submissionMessage)}
       <div className="filters btn-group stack-exception">{filterList}</div>
       <h2 id="list-heading">{headingText}</h2>
-      <TodoList
+
+     <TodoList
         tasks={tasks.filter(FILTER_MAP[filter])}
         toggleTaskCompleted={toggleTaskCompleted}
         deleteTask={deleteTask}
         editTask={editTask}
       />
-    </div>
-  );
-}
-
-
-
-  function TodoList({ tasks, toggleTaskCompleted, deleteTask, editTask }) {
-return(
-<ul
-      role="list"
-      className="todo-list stack-large stack-exception"
-      aria-labelledby="list-heading"
-    >
-      {tasks.map((task) => (
-        <Todo
-          key={task.id}
-          id={task.id}
-          name={task.name}
-          completed={task.completed}
-          toggleTaskCompleted={toggleTaskCompleted}
-          deleteTask={deleteTask}
-          editTask={editTask}
-        />
-      ))}
-    </ul>
-  );
-}
-   
-
-
-export default App;
-             
-
-

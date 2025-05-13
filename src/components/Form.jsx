@@ -1,6 +1,8 @@
 import React, { useState } from "react";
+
 function Form() {
   const [name, setName] = useState("");
+  
   function handleChange(e) {
     setName(e.target.value); // Update the input value in state
   }
