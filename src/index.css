@@ -360,3 +360,31 @@ body {
   flex-direction: row;
   flex-wrap: wrap;
 }/* End checkbox styles */
+.input-box-wrapper {
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.input-description {
+  width:90%;
+  padding: 0.5rem;
+  font-size: 1.5rem;
+
+  color: #bb1337;
+  margin-bottom: 0.5rem;
+}
+
+.input {
+  width: 90%; /* Larger width */
+  padding: 1rem; /* More padding for better spacing */
+  font-size: 1.5rem; /* Larger text for readability */
+  margin-bottom: 1.5rem; /* More space below the input box */
+  border: 2px solid #4d4d4d; /* Thicker border */
+  border-radius: 0.5rem; /* Rounded corners */
+}
+
+.btn {
+  padding: 1rem 2rem; /* Larger button padding */
+  font-size: 1.5rem; /* Larger button text */
+  border-radius: 0.5rem; /* Rounded corners */
+}
