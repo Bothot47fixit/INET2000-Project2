@@ -9,3 +9,5 @@ I did not understand filters until this project const FILTER_NAMES = Object.keys
 
 I need to get proficient at cleaner code. I tend to make redundant codeing becaseu im not always sure what is being read. but the console.log will tell no lies
  hopefully this README  will behave so I can keep my notes// the real launching for git is 5276 but my regular is 5500// i learned this updatein vite over 100 times
+
+ now i want all the info to be pushed to branch-two-todo, since they are merged will this happen automatically
