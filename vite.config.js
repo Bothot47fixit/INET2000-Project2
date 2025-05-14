@@ -5,9 +5,9 @@ export default defineConfig({
   plugins: [react()],
   base: '/', // Use '/' for development
   server: {
-    port: 5502, // Ensure this matches the port you're using
+    port: 5276, // Explicitly set the port
     hmr: {
-      port: 5505, // Explicitly set the WebSocket port
+       
     },
   },
   build: {

@@ -1,8 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPencilAlt, faTrash } from "@fortawesome/free-solid-svg-icons";
-
-
+import { faPencilAlt, faTrash } from "@fortawesome/free-solid-svg-icons"
 // Custom hook to track the previous value of a state or prop
 function usePrevious(value) {
   const ref = useRef();
@@ -11,17 +9,13 @@ function usePrevious(value) {
   });
   return ref.current;
 }
-
-
 function Todo({ id, name, completed, toggleTaskCompleted, deleteTask, editTask }) {
   const [isEditing, setIsEditing] = useState(false);
   const [newName, setNewName] = useState(name);
 
   const editFieldRef = useRef(null); // Reference for the input field
   const editButtonRef = useRef(null); // Reference for the edit button
-  const prevIsEditing = usePrevious(isEditing); // Track the previous value of isEditing
-  
-  
+  const prevIsEditing = usePrevious(isEditing); // Track the previous value of isEditing  
 useEffect(() => {
     if (!prevIsEditing && isEditing) {
       editFieldRef.current.focus(); // Focus on the input field when editing starts
@@ -34,14 +28,11 @@ useEffect(() => {
   const handleChange = (e) => {
     setNewName(e.target.value);
   };
-
   const handleSubmit = (e) => {
     e.preventDefault();
     editTask(id, newName); // Call the editTask function from App.jsx
     setIsEditing(false); // Exit editing mode
-  };
-
-   
+  }; 
   const editingTemplate = (
     <form className="stack-small" onSubmit={handleSubmit}>
       <div className="form-group">
@@ -91,12 +82,9 @@ useEffect(() => {
           onClick={() => setIsEditing(true)}
           ref={editButtonRef}
         >
-
-
           <FontAwesomeIcon icon={faPencilAlt} /> {/* Pencil Icon */} 
           Edit <span className="visually-hidden">{name}</span>
         </button>
-
 
          <button
           type="button"
@@ -109,10 +97,6 @@ useEffect(() => {
       </div>
     </div>
   );
- 
-  
    return <li className="todo">{isEditing ? editingTemplate : viewTemplate}</li>;
 }
-
-
 export default Todo;

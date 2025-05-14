@@ -1,15 +1,16 @@
 import React from 'react';
 
-function FilterButton(props) {
+function FilterButton({ name, isPressed, setFilter, style }) {
   return (
     <button
       type="button"
-      className="btn toggle-btn"
-      aria-pressed={props.isPressed} // Dynamically set aria-pressed
-      onClick={() => props.setFilter(props.name)} // Call setFilter with the filter name
+      className={`btn toggle-btn ${isPressed ? "btn-active" : ""}`} 
+      aria-pressed={isPressed} // Dynamically set aria-pressed
+      onClick={() => setFilter(name)} // Call setFilter with the filter name
+      style={style} // Dynamically set the button color
     >
       <span className="visually-hidden">Show </span>
-      <span>{props.name}</span> {/* Dynamically display the filter name */}
+      <span>{name}</span> {/* Dynamically display the filter name */}
       <span className="visually-hidden"> tasks</span>
     </button>
   );

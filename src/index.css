@@ -18,6 +18,10 @@ h2 {
 ul {
   list-style: none;
   padding: 0;
+
+.btn {
+  transition: background-color 0.3s ease;
+}
 }
 button {
   -moz-osx-font-smoothing: inherit;
@@ -63,7 +67,6 @@ body {
   max-width: 68rem;
   width: 100%;
 }
-
 @media screen and (min-width: 620px) {
   body {
     font-size: 1.9rem;
@@ -76,26 +79,22 @@ body {
   display: inline-block;
   margin-top: 0.4rem;  
 }
-
 * Edit button styles */
 .btn-edit {
   background-color: #007bff; /* Blue background */
   color: rgb(38, 9, 112); /* White text */
   border-color: #0056b3; /* Darker blue border */
 }
-
 .btn-edit:hover {
   background-color: #0056b3; /* Darker blue on hover */
   border-color: #004085; /* Even darker border on hover */
 }
-
 /* Delete button styles */
 .btn_danger {
   background-color: #ca3c3c; /* Red background */
   color: white; /* White text */
   border-color: #bd2130; /* Darker red border */
 }
-
 .btn {
   border: 0.2rem solid #4d4d4d;
   cursor: pointer;
@@ -226,7 +225,7 @@ body {
     font-size: 2.4rem;
   }
 }
-/* End general app styles */
+/* End general app styles */ 
 /* Todo item styles */
 .todo {
   display: flex;
@@ -341,9 +340,6 @@ body {
   text-align: center;
    border: 1px solid red; /* Debugging: Add a border */
 }
-
-
-
 @keyframes marquee {
   0% {
     transform: translateX(0%);
@@ -363,7 +359,4 @@ body {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-}
-
-
-/* End checkbox styles */
+}/* End checkbox styles */
